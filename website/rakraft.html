@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RÅKRAFT – Premium Torkad Entrecôte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1B3A2F;
+            --secondary: #C9A962;
+            --background: #F5F1E8;
+            --text: #2C2C2C;
+            --white: #FFFFFF;
+            --accent: #8B4513;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(245, 241, 232, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(27, 58, 47, 0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.1em;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, #0d1f18 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            border-radius: 2px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.15em;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.85);
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 3rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 1.25rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(201, 169, 98, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(201, 169, 98, 0.4);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Product Section */
+        .product-showcase {
+            padding: 8rem 5%;
+            background: var(--background);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .product-visual {
+            position: relative;
+        }
+
+        .package-mockup {
+            background: linear-gradient(145deg, var(--primary) 0%, #0d1f18 100%);
+            border-radius: 12px;
+            padding: 3rem;
+            aspect-ratio: 3/4;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 25px 80px rgba(27, 58, 47, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-mockup::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201,169,98,0.1) 0%, transparent 70%);
+            animation: shimmer 8s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .package-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            z-index: 1;
+        }
+
+        .package-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            letter-spacing: 0.1em;
+        }
+
+        .package-weight {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.8rem;
+        }
+
+        .package-center {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .package-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-subtitle {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        .package-protein {
+            margin-top: 2rem;
+        }
+
+        .protein-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            line-height: 1;
+        }
+
+        .protein-unit {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+        }
+
+        .package-bottom {
+            z-index: 1;
+        }
+
+        .package-claims {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .claim-badge {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.7rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .product-info p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .nutrition-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .nutrition-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(27, 58, 47, 0.1);
+        }
+
+        .nutrition-list li:last-child {
+            border-bottom: none;
+        }
+
+        .nutrition-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .nutrition-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .nutrition-text span {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 6rem 5%;
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .comparison-card {
+            padding: 3rem;
+            border-radius: 8px;
+        }
+
+        .comparison-card.rakraft {
+            background: rgba(201, 169, 98, 0.15);
+            border: 2px solid var(--secondary);
+        }
+
+        .comparison-card.other {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .comparison-card.rakraft h3 {
+            color: var(--secondary);
+        }
+
+        .comparison-card.other h3 {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .comparison-list li:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-label {
+            opacity: 0.7;
+        }
+
+        .comparison-value {
+            font-weight: 600;
+        }
+
+        .comparison-card.rakraft .comparison-value {
+            color: var(--secondary);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 8rem 5%;
+            background: var(--background);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 4rem auto 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -2rem;
+            top: 3rem;
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: var(--secondary);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, var(--background) 0%, #ebe7de 100%);
+        }
+
+        .use-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto 0;
+        }
+
+        .use-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .use-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(27, 58, 47, 0.1);
+        }
+
+        .use-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .use-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .use-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Guarantee Section */
+        .guarantee {
+            padding: 6rem 5%;
+            background: var(--primary);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .guarantee-badge {
+            width: 100px;
+            height: 100px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+        }
+
+        .guarantee h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .guarantee p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Waitlist Section */
+        .waitlist {
+            padding: 8rem 5%;
+            background: var(--background);
+        }
+
+        .waitlist-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .waitlist-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(27, 58, 47, 0.2);
+            border-radius: 4px;
+            font-size: 1rem;
+            background: var(--white);
+            transition: border-color 0.3s;
+        }
+
+        .waitlist-form input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .waitlist-form button {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .waitlist-form button:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .waitlist-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5% 2rem;
+            background: var(--primary);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .product-grid,
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+
+            .use-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .use-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">RÅ<span>KRAFT</span></div>
+        <ul class="nav-links">
+            <li><a href="#product">Produkten</a></li>
+            <li><a href="#process">Tillverkning</a></li>
+            <li><a href="#varfor">Varför RÅKRAFT</a></li>
+            <li><a href="pitch.html">Bli en del av oss</a></li>
+            <li><a href="#waitlist" class="nav-cta">Gå med</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Lansering Våren 2025</div>
+            <h1>RÅKRAFT</h1>
+            <p class="hero-subtitle">Svensk entrecôte. Långsamt torkad.</p>
+            <p class="hero-tagline">Äkta rökt. Inget annat.</p>
+            <a href="#waitlist" class="hero-cta">
+                Gå med i väntelistan
+                <span>→</span>
+            </a>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">40g</div>
+                    <div class="stat-label">Protein / påse</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">0%</div>
+                    <div class="stat-label">Tillsatser</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Ingredienser</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-showcase" id="product">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Produkten</p>
+                <h2 class="section-title">Bara kött. Bara kraft.</h2>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-visual">
+                    <div class="package-mockup">
+                        <div class="package-top">
+                            <div class="package-logo">RÅKRAFT</div>
+                            <div class="package-weight">70g</div>
+                        </div>
+                        <div class="package-center">
+                            <div class="package-title">RÅKRAFT</div>
+                            <div class="package-subtitle">Premium Torkad Entrecôte</div>
+                            <div class="package-protein">
+                                <div class="protein-number">40g</div>
+                                <div class="protein-unit">PROTEIN</div>
+                            </div>
+                        </div>
+                        <div class="package-bottom">
+                            <div class="package-claims">
+                                <span class="claim-badge">0% Tillsatser</span>
+                                <span class="claim-badge">Äkta Rökning</span>
+                                <span class="claim-badge">Svenskt Kött</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h3>Vi letade efter riktigt beef jerky.<br>Vi hittade inget.</h3>
+                    <p>Allt vi hittade var samma historia: malet kött formpressat till stripor, socker, sirap, rökarom, tillsatser som döljer dålig råvara.</p>
+                    <p>Så vi gjorde det själva. Vi köper hela entrecôte från svenska gårdar. Skär varje bit för hand. Saltar lätt. Torkar långsamt. Röker på riktigt.</p>
+                    <p>Tre steg. Inga genvägar. Bara kött.</p>
+                    
+                    <ul class="nutrition-list">
+                        <li>
+                            <div class="nutrition-icon">💪</div>
+                            <div class="nutrition-text">
+                                <strong>57g protein / 100g</strong>
+                                <span>Mer än dubbelt mot vanlig jerky</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="nutrition-icon">🌿</div>
+                            <div class="nutrition-text">
+                                <strong>Endast 3 ingredienser</strong>
+                                <span>Nötkött, salt, rök</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="nutrition-icon">🇸🇪</div>
+                            <div class="nutrition-text">
+                                <strong>Svensk entrecôte</strong>
+                                <span>Hela bitar, aldrig malet</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison" id="varfor">
+        <div class="container">
+            <div class="section-header" style="color: white;">
+                <p class="section-label" style="color: var(--secondary);">Skillnaden</p>
+                <h2 class="section-title" style="color: white;">Läs etiketten nästa gång</h2>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card rakraft">
+                    <h3>RÅKRAFT</h3>
+                    <ul class="comparison-list">
+                        <li>
+                            <span class="comparison-label">Köttkälla</span>
+                            <span class="comparison-value">Hel entrecôte</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Tillsatser</span>
+                            <span class="comparison-value">0 st</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Socker</span>
+                            <span class="comparison-value">0g</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Protein</span>
+                            <span class="comparison-value">40g / 70g</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Process</span>
+                            <span class="comparison-value">3 steg</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Rökning</span>
+                            <span class="comparison-value">Äkta vedrök</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card other">
+                    <h3>Vanlig Beef Jerky</h3>
+                    <ul class="comparison-list">
+                        <li>
+                            <span class="comparison-label">Köttkälla</span>
+                            <span class="comparison-value">Malet kött</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Tillsatser</span>
+                            <span class="comparison-value">5-10 st</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Socker</span>
+                            <span class="comparison-value">5-15g</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Protein</span>
+                            <span class="comparison-value">25-30g / 70g</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Process</span>
+                            <span class="comparison-value">10+ steg</span>
+                        </li>
+                        <li>
+                            <span class="comparison-label">Rökning</span>
+                            <span class="comparison-value">Rökarom</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Tillverkning</p>
+                <h2 class="section-title">Tre steg. Inga genvägar.</h2>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4 class="step-title">Premiumkött</h4>
+                    <p class="step-desc">Hel entrecôte från svenska gårdar. Inga binderier, inget malet kött. Bara riktigt kött.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4 class="step-title">Torkning & Rökning</h4>
+                    <p class="step-desc">Långsam torkning under 12+ timmar. Äkta rökning över ved – inte rökarom ur en flaska.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4 class="step-title">Förpackning</h4>
+                    <p class="step-desc">Skyddad från ljus och syre. Inga konserveringsmedel behövs – ordentligt torkat håller sig.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">När du behöver kraft</p>
+                <h2 class="section-title">Rå kraft, när som helst</h2>
+            </div>
+            
+            <div class="use-grid">
+                <div class="use-card">
+                    <div class="use-icon">🏋️</div>
+                    <h4 class="use-title">Träning</h4>
+                    <p class="use-desc">40g protein direkt efter passet. Inget socker som spikar insulin. Bara ren återhämtning.</p>
+                </div>
+                <div class="use-card">
+                    <div class="use-icon">✈️</div>
+                    <h4 class="use-title">Resa</h4>
+                    <p class="use-desc">Kräver ingen kylning. Tar ingen plats. Godare än flygplatsmaten.</p>
+                </div>
+                <div class="use-card">
+                    <div class="use-icon">🏔️</div>
+                    <h4 class="use-title">Äventyr</h4>
+                    <p class="use-desc">Vandring, klättring, fiske – energi som väger ingenting.</p>
+                </div>
+                <div class="use-card">
+                    <div class="use-icon">💼</div>
+                    <h4 class="use-title">Vardag</h4>
+                    <p class="use-desc">Mötet drog ut på tiden. Lunchen blev inte av. Du har alltid en påse i väskan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="guarantee">
+        <div class="guarantee-badge">✓</div>
+        <h2>Vi är så säkra att vi garanterar</h2>
+        <p>Inte nöjd? Pengarna tillbaka. Inga frågor. Ingen small print. Så mycket litar vi på vår produkt.</p>
+    </section>
+
+    <section class="waitlist" id="waitlist">
+        <div class="waitlist-content">
+            <p class="section-label">Begränsad upplaga</p>
+            <h2 class="section-title">Säkra din plats</h2>
+            <p style="color: #666; margin-top: 1rem;">Första batch är begränsad. Gå med i väntelistan för att få tillgång vid lansering.</p>
+            
+            <form class="waitlist-form">
+                <input type="email" placeholder="Din e-postadress" required>
+                <button type="submit">Gå med</button>
+            </form>
+            
+            <div class="waitlist-note">
+                <span>🔒</span>
+                <span>Vi skickar bara lanseringsinfo. Inget spam.</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">RÅKRAFT</div>
+        <p class="footer-tagline">Rått kött. Ren kraft.</p>
+        <p>&copy; 2025 RÅKRAFT. Svensk entrecôte, äkta rökning, inga genvägar.</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">
+            <a href="mailto:hello@rakraft.se">hello@rakraft.se</a> | 
+            <a href="#">Instagram</a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission handler
+        document.querySelector('.waitlist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            alert('Tack! Du är nu på väntelistan. Vi hör av oss vid lansering.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

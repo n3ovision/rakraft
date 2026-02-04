@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RÅKRAFT – Förpackningsdesign & Assets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F1E8;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #1B3A2F;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #1B3A2F;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #C9A962;
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .color-swatch {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .color-block {
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1rem;
+        }
+
+        .color-info {
+            background: white;
+            padding: 1rem;
+        }
+
+        .color-name {
+            font-weight: 600;
+            color: #1B3A2F;
+        }
+
+        .color-hex {
+            font-family: monospace;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: 2rem;
+        }
+
+        .type-name {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #C9A962;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-example {
+            font-size: 3rem;
+            color: #1B3A2F;
+        }
+
+        .type-example.playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .type-example.inter {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Package Mockups */
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .package-container {
+            perspective: 1000px;
+        }
+
+        /* Stand-up Pouch Design */
+        .pouch {
+            width: 280px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .pouch-body {
+            background: linear-gradient(145deg, #1B3A2F 0%, #0d1f18 100%);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 40px rgba(27, 58, 47, 0.4),
+                inset 0 -2px 0 rgba(0,0,0,0.2),
+                inset 0 2px 0 rgba(255,255,255,0.1);
+        }
+
+        .pouch-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02' fill-rule='evenodd'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .pouch-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pouch-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #C9A962;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+        }
+
+        .pouch-halal {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 0.6rem;
+            color: #1B3A2F;
+            font-weight: 700;
+        }
+
+        .pouch-center {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin: 2rem 0;
+        }
+
+        .pouch-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: white;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .pouch-variant {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+
+        .pouch-protein {
+            margin-top: 1.5rem;
+        }
+
+        .protein-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #C9A962;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .protein-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .pouch-bottom {
+            position: relative;
+            z-index: 1;
+            margin-top: 2rem;
+        }
+
+        .pouch-claims {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .claim-tag {
+            background: rgba(201, 169, 98, 0.2);
+            border: 1px solid rgba(201, 169, 98, 0.4);
+            color: #C9A962;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 2px;
+        }
+
+        .pouch-seal {
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #C9A962 0%, #e8d5a3 50%, #C9A962 100%);
+            margin-top: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .pouch-zip {
+            width: 60%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Logo variations */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .logo-variant {
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .logo-variant.dark {
+            background: #1B3A2F;
+        }
+
+        .logo-variant.light {
+            background: #F5F1E8;
+            border: 2px solid #1B3A2F;
+        }
+
+        .logo-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-variant.dark .logo-display {
+            color: #C9A962;
+        }
+
+        .logo-variant.light .logo-display {
+            color: #1B3A2F;
+        }
+
+        .logo-tagline {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .logo-variant.dark .logo-tagline {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .logo-variant.light .logo-tagline {
+            color: #666;
+        }
+
+        /* Label Specifications */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .spec-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .spec-title {
+            font-weight: 600;
+            color: #1B3A2F;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .spec-list {
+            list-style: none;
+        }
+
+        .spec-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: #666;
+        }
+
+        .spec-value {
+            font-weight: 500;
+            color: #1B3A2F;
+        }
+
+        /* Print Specifications */
+        .print-info {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .print-info h4 {
+            color: #1B3A2F;
+            margin-bottom: 0.5rem;
+        }
+
+        .print-info code {
+            background: #1B3A2F;
+            color: #C9A962;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .package-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pouch {
+                width: 240px;
+            }
+            
+            .protein-value {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RÅKRAFT</h1>
+        <p class="subtitle">Förpackningsdesign & Varumärkesassets – Komplett guide för tryckeri och produktion</p>
+
+        <!-- Color Palette -->
+        <div class="section">
+            <h2 class="section-title">1. Färgpalett</h2>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-block" style="background: #1B3A2F;">
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Skogsgrön (Primär)</div>
+                        <div class="color-hex">#1B3A2F</div>
+                        <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">CMYK: 80, 45, 70, 55<br>Pantone: 7739 C</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background: #C9A962;">
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Mässing (Sekundär)</div>
+                        <div class="color-hex">#C9A962</div>
+                        <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">CMYK: 15, 25, 65, 5<br>Pantone: 7753 C</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background: #F5F1E8;">
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Kräm (Bakgrund)</div>
+                        <div class="color-hex">#F5F1E8</div>
+                        <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">CMYK: 3, 3, 8, 0<br>Pantone: 7499 C</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background: #2C2C2C;">
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Mjuk Svart (Text)</div>
+                        <div class="color-hex">#2C2C2C</div>
+                        <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">CMYK: 70, 65, 60, 75</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typography -->
+        <div class="section">
+            <h2 class="section-title">2. Typografi</h2>
+            <div class="type-specimen">
+                <div class="type-name">Rubriker – Playfair Display</div>
+                <div class="type-example playfair">RÅKRAFT</div>
+                <p style="color: #666; margin-top: 0.5rem;">Elegant serif för varumärkesnamn och rubriker. Använd versaler med bred tracking för logotyp.</p>
+            </div>
+            <div class="type-specimen">
+                <div class="type-name">Brödtext – Inter</div>
+                <div class="type-example inter">Rå kraft från svenska gårdar</div>
+                <p style="color: #666; margin-top: 0.5rem;">Modern sans-serif för läsbarhet i brödtext, ingredienser och information.</p>
+            </div>
+        </div>
+
+        <!-- Logo Variations -->
+        <div class="section">
+            <h2 class="section-title">3. Logo-varianter</h2>
+            <div class="logo-grid">
+                <div class="logo-variant dark">
+                    <div class="logo-display">RÅKRAFT</div>
+                    <div class="logo-tagline">Primär (mörk bakgrund)</div>
+                </div>
+                <div class="logo-variant light">
+                    <div class="logo-display">RÅKRAFT</div>
+                    <div class="logo-tagline">Sekundär (ljus bakgrund)</div>
+                </div>
+            </div>
+            <div class="print-info">
+                <h4>Logo-specifikationer</h4>
+                <p>• Använd alltid <code>tracking: 0.15em</code> på logotypen<br>
+                • Minimumstorlek: 20mm bredd för tydlighet<br>
+                • Clear space: Minst 10mm runt logotypen<br>
+                • Förpackningsplacering: Övre tredjedelen, centrerat</p>
+            </div>
+        </div>
+
+        <!-- Package Front -->
+        <div class="section">
+            <h2 class="section-title">4. Förpackningsdesign – Framsida</h2>
+            <div class="package-grid">
+                <div class="package-container">
+                    <div class="pouch">
+                        <div class="pouch-body">
+                            <div class="pouch-top">
+                                <div class="pouch-logo">RÅKRAFT</div>
+                                <div class="pouch-halal">حلال</div>
+                            </div>
+                            <div class="pouch-center">
+                                <div class="pouch-brand">RÅKRAFT</div>
+                                <div class="pouch-variant">Premium Torkad Entrecôte</div>
+                                <div class="pouch-protein">
+                                    <div class="protein-value">40g</div>
+                                    <div class="protein-label">Protein per påse</div>
+                                </div>
+                            </div>
+                            <div class="pouch-bottom">
+                                <div class="pouch-claims">
+                                    <span class="claim-tag">0% Tillsatser</span>
+                                    <span class="claim-tag">Äkta Rök</span>
+                                    <span class="claim-tag">Svenskt</span>
+                                    <span class="claim-tag">70g</span>
+                                </div>
+                            </div>
+                            <div class="pouch-seal"></div>
+                            <div class="pouch-zip"></div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">70g Premium Pouch – Framsida</p>
+                </div>
+
+                <div class="spec-box">
+                    <div class="spec-title">Framsida – Innehåll</div>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Logotyp (övre)</span>
+                            <span class="spec-value">RÅKRAFT</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Halal-symbol</span>
+                            <span class="spec-value"> höger övre</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Varumärkesnamn</span>
+                            <span class="spec-value">Centrerat, stort</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Produktbeskrivning</span>
+                            <span class="spec-value">Premium Torkad Entrecôte</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Huvudsaklig claim</span>
+                            <span class="spec-value">40g Protein</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Claims</span>
+                            <span class="spec-value">0% Tillsatser, Äkta Rök, Svenskt</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Vikt</span>
+                            <span class="spec-value">70g netto</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specifications -->
+        <div class="section">
+            <h2 class="section-title">5. Tekniska Specifikationer</h2>
+            <div class="spec-grid">
+                <div class="spec-box">
+                    <div class="spec-title">Förpackningsmaterial</div>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Typ</span>
+                            <span class="spec-value">Stand-up pouch</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">PET/AL/PE (treförpackning)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Storlek</span>
+                            <span class="spec-value">130×200×35mm (B×H×D)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Fyllvolym</span>
+                            <span class="spec-value">70g netto</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Tillslutning</span>
+                            <span class="spec-value">Ziplock (återförslutbar)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Finish</span>
+                            <span class="spec-value">Matt / Soft-touch</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="spec-box">
+                    <div class="spec-title">Print-specifikationer</div>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Upplösning</span>
+                            <span class="spec-value">300 DPI minimum</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Färgrymd</span>
+                            <span class="spec-value">CMYK</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Bleed</span>
+                            <span class="spec-value">3mm</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Textstorlek (min)</span>
+                            <span class="spec-value">6pt för läsbarhet</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Format</span>
+                            <span class="spec-value">AI, PDF (vektor)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Tryck</span>
+                            <span class="spec-value">Flexotryck eller digital</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="spec-box">
+                    <div class="spec-title">Baksida – Krav (Sverige)</div>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Ingrediensförteckning</span>
+                            <span class="spec-value">Obligatorisk</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Näringsdeklaration</span>
+                            <span class="spec-value">per 100g & per portion</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Nettovikt</span>
+                            <span class="spec-value">70g e</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Bäst före-datum</span>
+                            <span class="spec-value">Plats för stämpling</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Förvaring</span>
+                            <span class="spec-value">Förvaras torrt...</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Producent</span>
+                            <span class="spec-value">Företagsinfo</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="spec-box">
+                    <div class="spec-title">Baksida – Krav (Egypten)</div>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Arabiska etiketter</span>
+                            <span class="spec-value">Obligatoriskt</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Halal-certifiering</span>
+                            <span class="spec-value">Tydlig logga</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Ursprungsland</span>
+                            <span class="spec-value">Made in Sweden</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Importör</span>
+                            <span class="spec-value">Egyptisk agent</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Batch-/lotnummer</span>
+                            <span class="spec-value">Spårbarhet</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <h2 class="section-title">6. Sammanfattning för Tryckeri</h2>
+            <div class="print-info">
+                <h4>Orderbrief – RÅKRAFT Förpackning</h4>
+                <p style="margin-top: 1rem;">
+                    <strong>Produkt:</strong> Stand-up pouch med ziplock<br>
+                    <strong>Material:</strong> PET/AL/PE, matt finish<br>
+                    <strong>Storlek:</strong> 130×200×35mm<br>
+                    <strong>Volym:</strong> 5,000 enheter (initialt)<br><br>
+                    
+                    <strong>Design:</strong><br>
+                    • Mörkgrön bakgrund (#1B3A2F)<br>
+                    • Mässingsguld accent (#C9A962)<br>
+                    • Playfair Display för logotyp<br>
+                    • Inter för brödtext<br><br>
+                    
+                    <strong>Filformat:</strong> PDF med 3mm bleed, CMYK, 300 DPI<br>
+                    <strong>Lieverans:</strong> Tryckta och förslutna påsar (om packning ingår)<br>
+                    <strong>Alternativ:</strong> Tomma tryckta påsar för egen packning
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
