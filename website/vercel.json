@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "rakraft",
+  "routes": [
+    { "src": "/", "dest": "/rakraft.html" },
+    { "src": "/pitch", "dest": "/pitch.html" }
+  ],
+  "github": {
+    "enabled": false
+  }
+}
