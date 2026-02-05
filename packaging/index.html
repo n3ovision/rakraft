@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RÅKRAFT – 4 Förpackningsalternativ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #1B3A2F;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .option {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .option-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #1B3A2F;
+            color: #C9A962;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #1B3A2F;
+        }
+
+        .option-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Pouch Container */
+        .pouch-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .pouch {
+            width: 200px;
+            position: relative;
+        }
+
+        .pouch-body {
+            aspect-ratio: 3/4;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Alternative 1: Classic Premium (Dark) */
+        .alt1 .pouch-body {
+            background: linear-gradient(145deg, #1B3A2F 0%, #0d1f18 100%);
+        }
+
+        .alt1 .pouch-body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.03'%3E%3Cpath d='M0 0h20v20H0zM20 20h20v20H20z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .alt1 .brand-name {
+            font-family: 'Playfair Display', serif;
+            color: #C9A962;
+            font-size: 1.4rem;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+
+        .alt1 .protein {
+            text-align: center;
+        }
+
+        .alt1 .protein-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #C9A962;
+            line-height: 1;
+        }
+
+        .alt1 .protein-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .alt1 .tagline {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.6rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Alternative 2: Natural/Eco (Light) */
+        .alt2 .pouch-body {
+            background: linear-gradient(145deg, #F5F1E8 0%, #E8E4DB 100%);
+            border: 2px solid #1B3A2F;
+        }
+
+        .alt2 .brand-name {
+            font-family: 'Playfair Display', serif;
+            color: #1B3A2F;
+            font-size: 1.4rem;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+
+        .alt2 .protein {
+            text-align: center;
+        }
+
+        .alt2 .protein-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #1B3A2F;
+            line-height: 1;
+        }
+
+        .alt2 .protein-label {
+            color: #666;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .alt2 .tagline {
+            color: #999;
+            font-size: 0.6rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .alt2 .eco-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #2E7D32;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 0.9rem;
+        }
+
+        /* Alternative 3: Bold/Modern */
+        .alt3 .pouch-body {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+        }
+
+        .alt3 .pouch-body::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: -50%;
+            width: 200%;
+            height: 60%;
+            background: linear-gradient(90deg, transparent, rgba(201,169,98,0.3), transparent);
+            transform: rotate(-15deg);
+        }
+
+        .alt3 .brand-name {
+            font-family: 'Bebas Neue', sans-serif;
+            color: white;
+            font-size: 2rem;
+            letter-spacing: 0.2em;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .alt3 .protein {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .alt3 .protein-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            font-weight: 400;
+            color: #C9A962;
+            line-height: 0.9;
+        }
+
+        .alt3 .protein-label {
+            color: #C9A962;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .alt3 .tagline {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.6rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        /* Alternative 4: Minimalist Scandinavian */
+        .alt4 .pouch-body {
+            background: #FAFAFA;
+            border: 1px solid #E0E0E0;
+        }
+
+        .alt4 .brand-name {
+            font-family: 'Inter', sans-serif;
+            color: #1B3A2F;
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        .alt4 .divider {
+            width: 40px;
+            height: 1px;
+            background: #C9A962;
+            margin: 1rem auto;
+        }
+
+        .alt4 .protein {
+            text-align: center;
+        }
+
+        .alt4 .protein-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #1B3A2F;
+            line-height: 1;
+        }
+
+        .alt4 .protein-label {
+            color: #999;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 400;
+        }
+
+        .alt4 .tagline {
+            color: #BBB;
+            font-size: 0.55rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Common elements */
+        .claims {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .alt1 .claim {
+            background: rgba(201,169,98,0.2);
+            color: #C9A962;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.5rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .alt2 .claim {
+            background: rgba(27,58,47,0.1);
+            color: #1B3A2F;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.5rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .alt3 .claim {
+            background: rgba(201,169,98,0.3);
+            color: #C9A962;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.5rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .alt4 .claim {
+            border: 1px solid #DDD;
+            color: #666;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.5rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Info section */
+        .option-info {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: #1B3A2F;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info-list {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .info-list li {
+            padding: 0.3rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .info-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #C9A962;
+        }
+
+        .vibe {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #555;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RÅKRAFT</h1>
+        <p class="subtitle">Välj ditt favoritalternativ för förpackningen</p>
+
+        <div class="grid">
+            <!-- Alternative 1: Classic Premium -->
+            <div class="option alt1">
+                <div class="option-header">
+                    <div class="option-number">1</div>
+                    <div class="option-title">Classic Premium</div>
+                    <div class="option-desc">Mörk & elegant</div>
+                </div>
+
+                <div class="pouch-container">
+                    <div class="pouch">
+                        <div class="pouch-body">
+                            <div class="brand-name">RÅKRAFT</div>
+                            <div class="protein">
+                                <div class="protein-value">40g</div>
+                                <div class="protein-label">Protein</div>
+                            </div>
+                            <div>
+                                <div class="tagline">Svensk entrecôte</div>
+                                <div class="claims">
+                                    <span class="claim">0% tillsatser</span>
+                                    <span class="claim">Äkta rök</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-info">
+                    <div class="info-title">Känsla:</div>
+                    <span class="vibe">Premium</span>
+                    <span class="vibe">Elegant</span>
+                    <span class="vibe">Traditionell</span>
+                    
+                    <ul class="info-list" style="margin-top: 1rem;">
+                        <li>Mörkgrön bakgrund (#1B3A2F)</li>
+                        <li>Guld-accenter (#C9A962)</li>
+                        <li>Playfair Display typsnitt</li>
+                        <li>Subtil textur i bakgrunden</li>
+                        <li>Står ut i butikshylla</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Alternative 2: Natural/Eco -->
+            <div class="option alt2">
+                <div class="option-header">
+                    <div class="option-number">2</div>
+                    <div class="option-title">Natural Eco</div>
+                    <div class="option-desc">Ljust & hållbart</div>
+                </div>
+
+                <div class="pouch-container">
+                    <div class="pouch">
+                        <div class="pouch-body">
+                            <div class="eco-badge">🌿</div>
+                            <div class="brand-name">RÅKRAFT</div>
+                            <div class="protein">
+                                <div class="protein-value">40g</div>
+                                <div class="protein-label">Protein</div>
+                            </div>
+                            <div>
+                                <div class="tagline">Svensk entrecôte</div>
+                                <div class="claims">
+                                    <span class="claim">KRAV</span>
+                                    <span class="claim">Lokal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-info">
+                    <div class="info-title">Känsla:</div>
+                    <span class="vibe">Ekologisk</span>
+                    <span class="vibe">Naturlig</span>
+                    <span class="vibe">Transparent</span>
+                    
+                    <ul class="info-list" style="margin-top: 1rem;">
+                        <li>Ljus krämvit bakgrund</li>
+                        <li>Mörkgrön text (#1B3A2F)</li>
+                        <li>Eco-badge för hållbarhet</li>
+                        <li>Passar KRAV-certifiering</li>
+                        <li>Visar "inget att dölja"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Alternative 3: Bold Modern -->
+            <div class="option alt3">
+                <div class="option-header">
+                    <div class="option-number">3</div>
+                    <div class="option-title">Bold Modern</div>
+                    <div class="option-desc">Kraftfull & sportig</div>
+                </div>
+
+                <div class="pouch-container">
+                    <div class="pouch">
+                        <div class="pouch-body">
+                            <div class="brand-name">RÅKRAFT</div>
+                            <div class="protein">
+                                <div class="protein-value">40g</div>
+                                <div class="protein-label">Pure Power</div>
+                            </div>
+                            <div>
+                                <div class="tagline">Premium beef jerky</div>
+                                <div class="claims">
+                                    <span class="claim">No additives</span>
+                                    <span class="claim">Pure protein</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-info">
+                    <div class="info-title">Känsla:</div>
+                    <span class="vibe">Sportig</span>
+                    <span class="vibe">Kraftfull</span>
+                    <span class="vibe">Modern</span>
+                    
+                    <ul class="info-list" style="margin-top: 1rem;">
+                        <li>Svart bakgrund</li>
+                        <li>Guldfärgade diagonala linjer</li>
+                        <li>Bebas Neue typsnitt</li>
+                        <li>Passar gym/crossfit</li>
+                        <li>Mer "internationell" känsla</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Alternative 4: Minimalist -->
+            <div class="option alt4">
+                <div class="option-header">
+                    <div class="option-number">4</div>
+                    <div class="option-title">Minimalist</div>
+                    <div class="option-desc">Ren & skandinavisk</div>
+                </div>
+
+                <div class="pouch-container">
+                    <div class="pouch">
+                        <div class="pouch-body">
+                            <div class="brand-name">RÅKRAFT</div>
+                            <div class="divider"></div>
+                            <div class="protein">
+                                <div class="protein-value">40g</div>
+                                <div class="protein-label">Protein</div>
+                            </div>
+                            <div>
+                                <div class="tagline">Swedish craft</div>
+                                <div class="claims">
+                                    <span class="claim">Pure</span>
+                                    <span class="claim">Local</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-info">
+                    <div class="info-title">Känsla:</div>
+                    <span class="vibe">Minimalistisk</span>
+                    <span class="vibe">Skandinavisk</span>
+                    <span class="vibe">Exklusiv</span>
+                    
+                    <ul class="info-list" style="margin-top: 1rem;">
+                        <li>Vit/ljusgrå bakgrund</li>
+                        <li>Tunna linjer och borders</li>
+                        <li>Inter typsnitt (tunt)</li>
+                        <li>Fokus på vitluft</li>
+                        <li>Designerns val</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: white; border-radius: 12px;">
+            <h3 style="font-family: 'Playfair Display', serif; color: #1B3A2F; margin-bottom: 1rem;">Vilket alternativ väljer du?</h3>
+            <p style="color: #666; margin-bottom: 1rem;">Berätta vilket nummer du föredrar så uppdaterar jag designen.</p>
+            <p style="color: #999; font-size: 0.9rem;">Alternativ 1 (Classic Premium) är den som ligger live på sajten nu.</p>
+        </div>
+    </div>
+</body>
+</html>

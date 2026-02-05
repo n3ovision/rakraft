@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RÅKRAFT Admin – Leads & Pipeline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1B3A2F;
+            --secondary: #C9A962;
+            --background: #F5F1E8;
+            --text: #2C2C2C;
+            --white: #FFFFFF;
+            --success: #2E7D32;
+            --warning: #F57C00;
+            --danger: #C62828;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f0f0;
+            color: var(--text);
+        }
+
+        /* Login Screen */
+        .login-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #0d1f18 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .login-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-box h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-box p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Admin Layout */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 1.5rem;
+        }
+
+        .sidebar-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .nav-menu .badge {
+            float: right;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 1px solid #ddd;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h3 {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .stat-change.positive {
+            color: var(--success);
+        }
+
+        /* Pipeline Board */
+        .pipeline-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pipeline-column {
+            background: #e8e8e8;
+            border-radius: 12px;
+            padding: 1rem;
+            min-height: 400px;
+        }
+
+        .pipeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .pipeline-header h4 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pipeline-count {
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pipeline-column.new { border-top: 4px solid #9E9E9E; }
+        .pipeline-column.contacted { border-top: 4px solid #2196F3; }
+        .pipeline-column.meeting { border-top: 4px solid #FF9800; }
+        .pipeline-column.proposal { border-top: 4px solid #9C27B0; }
+        .pipeline-column.closed { border-top: 4px solid var(--success); }
+
+        /* Lead Cards */
+        .lead-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .lead-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .lead-card.hot { border-left-color: var(--danger); }
+        .lead-card.warm { border-left-color: var(--warning); }
+        .lead-card.cold { border-left-color: #9E9E9E; }
+
+        .lead-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .lead-role {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .lead-amount {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .lead-date {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+
+        /* Leads Table */
+        .leads-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 100px;
+            padding: 1rem 1.5rem;
+            background: #f9f9f9;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+            color: #666;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 100px;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .table-row:hover {
+            background: #f9f9f9;
+        }
+
+        .lead-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .lead-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--secondary);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-weight: 600;
+        }
+
+        .lead-details strong {
+            display: block;
+            color: var(--primary);
+        }
+
+        .lead-details span {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-new { background: #E3F2FD; color: #1976D2; }
+        .status-contacted { background: #FFF3E0; color: #F57C00; }
+        .status-meeting { background: #F3E5F5; color: #7B1FA2; }
+        .status-proposal { background: #E8F5E9; color: #388E3C; }
+        .status-closed { background: #E0E0E0; color: #616161; }
+
+        /* Notes Section */
+        .notes-panel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .notes-panel h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .note-item {
+            padding: 1rem;
+            border-left: 3px solid var(--secondary);
+            background: #f9f9f9;
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note-date {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pipeline-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-header,
+            .table-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <h1>RÅKRAFT</h1>
+            <p>Admin – Leads & Pipeline</p>
+            <input type="password" id="password" placeholder="Lösenord" value="rakraft2025">
+            <button onclick="login()">Logga in</button>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: #999;">
+                Test-lösenord: <code>rakraft2025</code>
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-layout hidden" id="adminDashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">RÅKRAFT</div>
+            <ul class="nav-menu">
+                <li><a href="#" class="active" onclick="showView('dashboard')">📊 Dashboard</a></li>
+                <li><a href="#" onclick="showView('pipeline')">🔄 Pipeline <span class="badge">12</span></a></li>
+                <li><a href="#" onclick="showView('leads')">👥 Alla Leads <span class="badge">24</span></a></li>
+                <li><a href="#" onclick="showView('contacts')">📞 Kontakter</a></li>
+                <li><a href="#" onclick="showView('deals')">💼 Affärer</a></li>
+                <li><a href="#" onclick="logout()">🚪 Logga ut</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <div id="dashboardView">
+                <div class="header">
+                    <h2>Dashboard</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary">Exportera</button>
+                        <button class="btn btn-primary" onclick="showAddLead()">+ Ny Lead</button>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Totalt antal leads</h3>
+                        <div class="stat-value">24</div>
+                        <div class="stat-change positive">+3 denna vecka</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Aktiva i pipeline</h3>
+                        <div class="stat-value">12</div>
+                        <div class="stat-change positive">+2 denna vecka</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Stängda affärer</h3>
+                        <div class="stat-value">3</div>
+                        <div class="stat-change positive">+1 denna månad</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Totalt värde</h3>
+                        <div class="stat-value">1.2M</div>
+                        <div class="stat-change">potentiellt</div>
+                    </div>
+                </div>
+
+                <!-- Pipeline -->
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 1rem;">Sales Pipeline</h3>
+                <div class="pipeline-container">
+                    <div class="pipeline-column new">
+                        <div class="pipeline-header">
+                            <h4>Ny</h4>
+                            <span class="pipeline-count">5</span>
+                        </div>
+                        <div class="lead-card hot">
+                            <div class="lead-name">Anders Svensson</div>
+                            <div class="lead-role">Investerare</div>
+                            <div class="lead-amount">250 000 kr</div>
+                            <div class="lead-date">Idag</div>
+                        </div>
+                        <div class="lead-card warm">
+                            <div class="lead-name">Maria Lind</div>
+                            <div class="lead-role">Partner</div>
+                            <div class="lead-amount">100 000 kr</div>
+                            <div class="lead-date">Igår</div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-column contacted">
+                        <div class="pipeline-header">
+                            <h4>Kontaktad</h4>
+                            <span class="pipeline-count">4</span>
+                        </div>
+                        <div class="lead-card hot">
+                            <div class="lead-name">Johan Berg</div>
+                            <div class="lead-role">Investerare</div>
+                            <div class="lead-amount">500 000 kr</div>
+                            <div class="lead-date">2 dagar sen</div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-column meeting">
+                        <div class="pipeline-header">
+                            <h4>Möte bokat</h4>
+                            <span class="pipeline-count">2</span>
+                        </div>
+                        <div class="lead-card warm">
+                            <div class="lead-name">Erik Nilsson</div>
+                            <div class="lead-role">Strategisk partner</div>
+                            <div class="lead-amount">150 000 kr</div>
+                            <div class="lead-date">Möte 12/2</div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-column proposal">
+                        <div class="pipeline-header">
+                            <h4>Offert skickad</h4>
+                            <span class="pipeline-count">1</span>
+                        </div>
+                        <div class="lead-card hot">
+                            <div class="lead-name">Lisa Andersson</div>
+                            <div class="lead-role">Investerare</div>
+                            <div class="lead-amount">300 000 kr</div>
+                            <div class="lead-date">Väntar svar</div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-column closed">
+                        <div class="pipeline-header">
+                            <h4>Stängd</h4>
+                            <span class="pipeline-count">3</span>
+                        </div>
+                        <div class="lead-card">
+                            <div class="lead-name">Karlsson AB</div>
+                            <div class="lead-role">Partner</div>
+                            <div class="lead-amount">400 000 kr ✓</div>
+                            <div class="lead-date">Jan 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Leads Table -->
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 1rem;">Senaste Leads</h3>
+                <div class="leads-table">
+                    <div class="table-header">
+                        <div>Namn</div>
+                        <div>Roll</div>
+                        <div>Status</div>
+                        <div>Belopp</div>
+                        <div>Åtgärd</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="lead-info">
+                            <div class="lead-avatar">AS</div>
+                            <div class="lead-details">
+                                <strong>Anders Svensson</strong>
+                                <span>anders@email.se</span>
+                            </div>
+                        </div>
+                        <div>Investerare</div>
+                        <div><span class="status-badge status-new">Ny</span></div>
+                        <div>250 000 kr</div>
+                        <div><button class="btn btn-secondary">Öppna</button></div>
+                    </div>
+                    <div class="table-row">
+                        <div class="lead-info">
+                            <div class="lead-avatar">ML</div>
+                            <div class="lead-details">
+                                <strong>Maria Lind</strong>
+                                <span>maria@email.se</span>
+                            </div>
+                        </div>
+                        <div>Partner</div>
+                        <div><span class="status-badge status-contacted">Kontaktad</span></div>
+                        <div>100 000 kr</div>
+                        <div><button class="btn btn-secondary">Öppna</button></div>
+                    </div>
+                    <div class="table-row">
+                        <div class="lead-info">
+                            <div class="lead-avatar">JB</div>
+                            <div class="lead-details">
+                                <strong>Johan Berg</strong>
+                                <span>johan@email.se</span>
+                            </div>
+                        </div>
+                        <div>Investerare</div>
+                        <div><span class="status-badge status-meeting">Möte bokat</span></div>
+                        <div>500 000 kr</div>
+                        <div><button class="btn btn-secondary">Öppna</button></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple password protection (demo only - not secure for production)
+        function login() {
+            const password = document.getElementById('password').value;
+            if (password === 'rakraft2025') {
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+            } else {
+                alert('Fel lösenord!');
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('password').value = '';
+        }
+
+        function showView(view) {
+            // In a real app, this would switch between different views
+            console.log('Switching to view:', view);
+        }
+
+        function showAddLead() {
+            alert('Här skulle du kunna lägga till en ny lead!');
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>
